@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediFinder - Medicine Information</title>
+    <!-- Link to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Link to our CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1><a href="/">MediFinder</a></h1>
+        <p>Your Quick Medicine Information Source</p>
+    </header>
+
+    <main class="container">
+        <div class="search-container card">
+            <input type="text" id="medicine-name" placeholder="Enter medicine name (e.g., Paracetamol)">
+            <button id="search-button">Search</button>
+        </div>
+
+        <div class="status-container">
+             <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <span>Searching...</span>
+            </div>
+            <div class="error" id="error"></div>
+        </div>
+
+
+        <div class="results card" id="results">
+            <h2 id="medicine-title"></h2>
+            <p class="medicine-id"><strong>ID:</strong> <span id="medicine-id"></span></p>
+            <hr>
+
+            <div class="info-grid">
+                <div class="section">
+                    <h3><i class="icon">🔄</i> Substitutes</h3>
+                    <ul id="substitutes"></ul>
+                </div>
+
+                <div class="section">
+                    <h3><i class="icon">🎯</i> Uses</h3>
+                    <ul id="uses"></ul>
+                </div>
+
+                <div class="section wide">
+                    <h3><i class="icon">⚠️</i> Side Effects</h3>
+                    <ul id="side-effects"></ul>
+                </div>
+
+                 <div class="section">
+                    <h3><i class="icon">🔬</i> Classification</h3>
+                    <p><strong>Chemical:</strong> <span id="chemical-class"></span></p>
+                    <p><strong>Therapeutic:</strong> <span id="therapeutic-class"></span></p>
+                    <p><strong>Action:</strong> <span id="action-class"></span></p>
+                </div>
+
+                 <div class="section">
+                     <h3><i class="icon">❓</i> Other Info</h3>
+                     <p><strong>Habit Forming:</strong> <span id="habit-forming"></span></p>
+                     <p><strong>Match Score:</strong> <span id="match-score"></span></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2023 MediFinder. Information provided is for reference only.</p>
+    </footer>
+
+    <!-- Link to our JavaScript -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
