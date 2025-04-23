@@ -1,79 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MediFinder - Medicine Information</title>
-    <!-- Link to Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <!-- Link to our CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MediFinder – Medicine Info</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
-    <header>
-        <h1><a href="/">MediFinder</a></h1>
-        <p>Your Quick Medicine Information Source</p>
-    </header>
+  <header>
+    <div class="hospital-header">
+      <span class="medical-plus" title="Medical"><!-- Red Cross -->
+        <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true" focusable="false">
+          <circle cx="15" cy="15" r="15" fill="#fff" stroke="#e53935" stroke-width="3"/>
+          <rect x="12.2" y="5" width="5.6" height="20" rx="2.7" fill="#e53935"/>
+          <rect x="5" y="12.2" width="20" height="5.6" rx="2.7" fill="#e53935"/>
+        </svg>
+      </span>
+      <div>
+        <h1>MediFinder</h1>
+        <p>Your Quick <span class="text-medical">Medical</span> Information Source</p>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="card">
+      <div class="search-bar">
+        <span class="search-icon" title="Search Medicine">
+          <!-- Stethoscope SVG icon -->
+          <svg width="24" height="24" fill="none" aria-hidden="true"><path d="M16.4 4.5V10a4.4 4.4 0 1 1-8.8 0V4.5M12 20.2a2.9 2.9 0 0 0 2.9-2.9 2.9 2.9 0 1 0-5.8 0A2.9 2.9 0 0 0 12 20.2Z" stroke="#1976d2" stroke-width="2"/></svg>
+        </span>
+        <input type="text" id="medicine-name" placeholder="Enter medicine name (e.g., Paracetamol)" autocomplete="off" aria-label="Medicine name">
+        <button id="search-button" type="button">
+          <span class="btn-icon">🔍</span> Search
+        </button>
+      </div>
+      <div id="status-area"></div>
+    </div>
 
-    <main class="container">
-        <div class="search-container card">
-            <input type="text" id="medicine-name" placeholder="Enter medicine name (e.g., Paracetamol)">
-            <button id="search-button">Search</button>
+    <div class="results-container" id="results">
+      <h2 class="medicine-title" id="medicine-title"></h2>
+      <div class="medicine-id"><strong>ID:</strong> <span id="medicine-id"></span></div>
+      <hr>
+      <div class="info-grid">
+        <div class="section">
+          <h3><span class="section-icon" title="Substitutes">♻️</span> Substitutes</h3>
+          <ul class="info-list" id="substitutes"></ul>
         </div>
-
-        <div class="status-container">
-             <div class="loading" id="loading">
-                <div class="spinner"></div>
-                <span>Searching...</span>
-            </div>
-            <div class="error" id="error"></div>
+        <div class="section">
+          <h3><span class="section-icon" title="Uses">💊</span> Uses</h3>
+          <ul class="info-list" id="uses"></ul>
         </div>
-
-
-        <div class="results card" id="results">
-            <h2 id="medicine-title"></h2>
-            <p class="medicine-id"><strong>ID:</strong> <span id="medicine-id"></span></p>
-            <hr>
-
-            <div class="info-grid">
-                <div class="section">
-                    <h3><i class="icon">🔄</i> Substitutes</h3>
-                    <ul id="substitutes"></ul>
-                </div>
-
-                <div class="section">
-                    <h3><i class="icon">🎯</i> Uses</h3>
-                    <ul id="uses"></ul>
-                </div>
-
-                <div class="section wide">
-                    <h3><i class="icon">⚠️</i> Side Effects</h3>
-                    <ul id="side-effects"></ul>
-                </div>
-
-                 <div class="section">
-                    <h3><i class="icon">🔬</i> Classification</h3>
-                    <p><strong>Chemical:</strong> <span id="chemical-class"></span></p>
-                    <p><strong>Therapeutic:</strong> <span id="therapeutic-class"></span></p>
-                    <p><strong>Action:</strong> <span id="action-class"></span></p>
-                </div>
-
-                 <div class="section">
-                     <h3><i class="icon">❓</i> Other Info</h3>
-                     <p><strong>Habit Forming:</strong> <span id="habit-forming"></span></p>
-                     <p><strong>Match Score:</strong> <span id="match-score"></span></p>
-                </div>
-            </div>
+        <div class="section wide">
+          <h3><span class="section-icon" title="Side Effects">⚕️</span> Side Effects</h3>
+          <ul class="info-list" id="side-effects"></ul>
         </div>
-    </main>
-
-    <footer>
-        <p>© 2023 MediFinder. Information provided is for reference only.</p>
-    </footer>
-
-    <!-- Link to our JavaScript -->
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+        <div class="section">
+          <h3><span class="section-icon" title="Classification">🧬</span> Classification</h3>
+          <p><strong>Chemical:</strong> <span id="chemical-class"></span></p>
+          <p><strong>Therapeutic:</strong> <span id="therapeutic-class"></span></p>
+          <p><strong>Action:</strong> <span id="action-class"></span></p>
+        </div>
+        <div class="section">
+          <h3><span class="section-icon" title="Other Info">📋</span> Other Info</h3>
+          <p><strong>Habit Forming:</strong> <span id="habit-forming"></span></p>
+          <p><strong>Match Score:</strong> <span id="match-score"></span></p>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <span class="footer-hospital">
+      <svg width="18" height="18" viewBox="0 0 30 30" aria-hidden="true" class="inline-medplus"><circle cx="15" cy="15" r="15" fill="#fff" stroke="#e53935" stroke-width="3"/><rect x="12" y="7" width="6" height="16" rx="2" fill="#e53935"/><rect x="7" y="12" width="16" height="6" rx="2" fill="#e53935"/></svg>
+      &nbsp;© 2025 MediFinder. For informational purposes only.
+    </span>
+  </footer>
+  <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+  <script src="static/js/script.js"></script>
 </body>
 </html>
